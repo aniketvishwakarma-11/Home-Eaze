@@ -1,0 +1,112 @@
+<% layout("/layout/boilerplate") %>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="slideshow">
+        <div class="slide active" style="background-image: url('https://www.perfettotech.ae/wp-content/uploads/2024/02/MicrosoftTeams-image-100.jpg');"></div>
+        <div class="slide" style="background-image: url('https://media.istockphoto.com/id/1300836775/photo/young-indian-woman-in-gloves-clean-kitchen-counter.jpg?s=612x612&w=0&k=20&c=qwGZhXVEFJVCU9wJ044tUSdbrCiLuThGhO1_SrFkYlo=');"></div>
+        <div class="slide" style="background-image: url('https://surplus.lk/wp-content/uploads/2021/02/painter-services.jpg');"></div>
+        <div class="hero-content">
+        <h1>Home Services at your Door Step</h1>
+        
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-grid">
+        <div class="service-card">
+            <img src="https://img.icons8.com/color/96/vacuum-cleaner.png" alt="">
+            <h3>Cleaning</h3>
+            <p>Deep cleaning, dusting, mopping, and laundry services.</p>
+        </div>
+        <div class="service-card">
+            <img src="https://img.icons8.com/color/96/chef-hat.png" alt="">
+            <h3>Cooking</h3>
+            <p>Delicious home-cooked meals prepared to your taste.</p>
+        </div>
+        <div class="service-card">
+            <img src="https://img.icons8.com/color/96/baby.png" alt="">
+            <h3>Babysitting</h3>
+            <p>Trusted babysitters to take care of your children safely.</p>
+        </div>
+        </div>
+    </section>
+
+    
+        
+
+    <!-- Gallery -->
+    <section class="gallery">
+        <h2>Our Helpers at Work</h2>
+        <div class="gallery-grid">
+        <img src="https://cleanmyplace.in/assets/img/services/1.jpg" alt="Cleaning">
+        <img src="https://247wallst.com/wp-content/uploads/2020/04/imageForEntry9-bbt.jpg" alt="Cooking">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2024/6/430768791/YI/SV/DE/185965587/housemaid-babysitter-nanny.jpg" alt="Babysitting">
+        <img src="https://www.shutterstock.com/image-photo/create-service-engineer-indian-face-600nw-2645001265.jpg" alt="Maid Work">
+        <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1200x630_center,f_auto,q_auto:best/rockcms/2024-05/230412-cleaning-washing-machine-vl-2x1-75a523.jpg" alt="Laundry">
+        <img src="https://content.jdmagicbox.com/v2/comp/delhi/f5/011pxx11.xx11.230214100846.u2f5/catalogue/mr-yamin-malviya-nagar-delhi-1jaysumpcj.jpg" alt="Helper">
+        </div>
+    </section>
+
+
+     <section class="reviews">
+    <h2>What Our Customers Say</h2>
+    <div class="review-grid">
+      <div class="review-card">
+        <p class="review-text">"The maid service was excellent! Very professional and punctual."</p>
+        <div class="review-author">- Priya Sharma ⭐⭐⭐⭐⭐</div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"I booked a babysitter through HomeFix and she was amazing with my kids."</p>
+        <div class="review-author">- Rohan Mehta ⭐⭐⭐⭐☆</div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"Quick AC repair at an affordable price. Highly recommended!"</p>
+        <div class="review-author">- Sneha Kulkarni ⭐⭐⭐⭐⭐</div>
+      </div>
+    </div>
+</section>
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+        <h3 id="modalTitle">Booking Maid</h3>
+        <p>We will contact you shortly to confirm your booking.</p>
+        <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function scrollToMaids() {
+        document.getElementById('maids').scrollIntoView({behavior:'smooth'});
+        }
+        function openModal(name) {
+        document.getElementById('modalTitle').innerText = "Booking " + name;
+        document.getElementById('bookingModal').classList.add('active');
+        }
+        function closeModal() {
+        document.getElementById('bookingModal').classList.remove('active');
+        }
+        function submitForm(e) {
+        e.preventDefault();
+        alert("Thank you! We will reply soon.");
+        }
+        const slides = document.querySelectorAll('.slide');
+        let index = 0;
+
+        function showNextSlide() {
+        // remove active from current
+        slides[index].classList.remove('active');
+
+        // move to next
+        index = (index + 1) % slides.length;
+
+        // add active to new
+        slides[index].classList.add('active');
+        }
+
+        // change slide every 3 seconds
+        setInterval(showNextSlide, 3000);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

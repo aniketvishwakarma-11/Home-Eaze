@@ -1,0 +1,10 @@
+<%- layout("/layout/boilerplate") %>
+
+    <h3>Details of <%= professional.name %></h3>
+    <img src="<%= professional.image %>" alt="<%= professional.name %>" style="width:200px;height:200px;">
+    <p>Service: <%= professional.profession %></p>
+    <p>Experience: <%= professional.experience %> years</p>
+    <p>Rate: &#8377;<%= professional.rate.perHour.toLocaleString("en-IN") %>perHour 
+            &#8377;<%= professional.rate.perDay.toLocaleString("en-IN") %>perDay</p>
+    <p>Contact: <%= professional.contact %></p>
+    <a href="/search">Back to all professionals</a>

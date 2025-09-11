@@ -1,0 +1,29 @@
+<% layout("/layout/boilerplate") %>
+<h3>Lists of All Professional</h3>
+<form action="/search" method="POST">
+    <input type="text" name="query" placeholder="Search professionals...">
+    <button type="submit">Search</button>
+</form>
+
+<div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1">
+            <% for(let professional of professionals) { %>
+                <a href="/search/<%= professional._id %>" class="">
+                    <div class="card col">
+                        <img src="<%= professional.image %>" class="card-img-top" alt="listing.image"
+                            style="height:15rem ">
+                        <div class="card-img-overlay"></div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <b>
+                                    <%= professional.name %>
+                                </b><br>
+                                <i> <%= professional.profession %></i>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <% } %>
+        </div>
+
+

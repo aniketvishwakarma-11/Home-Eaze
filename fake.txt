@@ -1,0 +1,67 @@
+<footer>
+    <div class="f-info">
+        <div class="f-info-social">
+            <i class="fa-brands fa-square-facebook"></i>
+            <i class="fa-brands fa-square-instagram"></i>
+            <i class="fa-brands fa-linkedin"></i>
+        </div>
+        <div class="f-info-brand"> &copy; Home-Fix Private Limited</div>
+        <div class="f-info-links">
+            
+            <a href="/about">About</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+        </div>
+    </div>
+</footer>
+
+
+<form action="/search" method="POST">
+    <input type="text" name="query" placeholder="Search professionals...">
+    <button type="submit">Search</button>
+</form>
+<ul>
+    <% for(let professional of professionals){ %>
+        <li>
+            <a href="/search/<%= professional._id %>"><%= professional.name %></a>
+        </li>
+    <% } %>
+</ul>
+
+
+
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const bookingSchema = new Schema({
+  name: String,
+  profession: String,  // "Carpenter", "Plumber", "Home Help"
+  experience: Number,  // in years
+  rate: {
+    perHour: Number,
+    perDay: Number
+  },
+  availability: Boolean,
+  contact: String,
+  image: {
+    type: String,
+    default: "https://randomuser.me/api/portraits/men/1.jpg",
+            set: v => v === "" ? "https://randomuser.me/api/portraits/men/1.jpg" : v
+  }
+});
+
+const Booking = mongoose.model('Booking', bookingSchema); //this here creates a collection named listings in the database
+module.exports = Booking; //exporting this model to be used in other files
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+<% layout("/layout/boilerplate") %>
+<div class="boxed-container">
+
+    <!-- Contact Section -->
+    <section class="container py-5">
+        <div class="row g-4">
+
+            <!-- Left Column: Contact Form -->
+            <div class="col-lg-6">
+                <div class="p-4 shadow rounded bg-white form-container">
+                    <h3 class="mb-4 text-dark">Contact Us</h3>
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label text-dark">Full Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your full name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-dark">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label text-dark">Phone Number</label>
+                            <div class="input-group">
+                                <select class="form-select" style="max-width: 90px;">
+                                    <option selected>+91</option>
+                                    <option value="+1">+1</option>
+                                    <option value="+44">+44</option>
+                                    <option value="+61">+61</option>
+                                </select>
+                                <input type="tel" class="form-control" id="phone" placeholder="9876543210">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label text-dark">Message</label>
+                            <textarea class="form-control" id="message" rows="4"
+                                placeholder="Write your message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Column: Info Cards -->
+            <div class="col-lg-6">
+                <div class="d-flex flex-column gap-3">
+                    <div class="info-card p-3 shadow-sm rounded bg-white">
+                        <h6>Need help?</h6>
+                        <p>For any immediate help regarding your bookings, please log-in and visit our Help Center. You
+                            will be able to get instant resolution through our chat support.</p>
+                    </div>
+                    <div class="info-card p-3 shadow-sm rounded bg-white">
+                        <h6>Still facing issues?</h6>
+                        <p>If you've already tried chatting with us and are not satisfied with the resolution - please
+                            send us an email on <a href="mailto:sanjnak14@gmail.com">sanjnak14@gmail.com</a>. We will
+                            get back to you within 24-48 hours.</p>
+                    </div>
+                    <div class="info-card p-3 shadow-sm rounded bg-white">
+                        <h6>Media inquiries</h6>
+                        <p>For media inquiries, you can send us an email on <a
+                                href="mailto:rashitirpude2@gmail.com">rashitirpude2@gmail.com</a>.</p>
+                    </div>
+                    <div class="info-card p-3 shadow-sm rounded bg-white">
+                        <h6>What is our helpline number?</h6>
+                        <p>We have switched from a customer care phone number to a fast, simple-to-use chat based
+                            support. Just open our Help Center, select your issue, and initiate a chat with us.</p>
+                    </div>
+                    <div class="info-card p-3 shadow-sm rounded bg-white">
+                        <h6>Our office addresses</h6>
+                        <p>You can view a list of all our office addresses by clicking below.</p>
+                        <a href="#">View addresses</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
