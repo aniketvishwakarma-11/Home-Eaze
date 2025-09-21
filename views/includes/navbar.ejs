@@ -1,15 +1,33 @@
-<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
-    <div class="container-fluid ">
-        <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"></button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link" href="/">Home</a>
-                <input type="text" value="Search">
-                <a class="nav-link" href="/search">Professional</a>
-                <a class="nav-link" href="/contactUs">Contact US</a>
-                <a class="nav-link" href="/contact">Reviews</a>
-                <a class="nav-link" href="/login">Login/Register</a>
-        </div>
-    </div>
-</nav>
+<header>
+  <!-- <div class="logo">
+    <img src="https://img.icons8.com/fluency/64/maintenance.png" alt="HomeFix Logo">
+    HomeEase
+  </div> -->
+
+  <nav>
+    <ul>
+      <!-- Home -->
+      <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+
+      <!-- Search -->
+      <li>
+        <form action="/search" method="POST" class="search-box">
+          <input type="text" name="query" placeholder="Search by Name, Profession, or Location">
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </li>
+
+      <!-- Professionals -->
+      <li><a href="/search"><i class="fas fa-users"></i> Professionals</a></li>
+
+      <!-- Contact -->
+      <li><a href="/contactUs"><i class="fas fa-envelope"></i> Contact Us</a></li>
+
+      <!-- Login/Register -->
+      <li><a href="/login"><i class="fas fa-user"></i> Login/Register</a></li>
+
+      <!-- Booking -->
+      <li><a href="/myBookings"><i class="fas fa-calendar-check"></i> Booking</a></li>
+    </ul>
+  </nav>
+</header>

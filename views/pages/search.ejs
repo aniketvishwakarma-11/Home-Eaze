@@ -1,29 +1,178 @@
 <% layout("/layout/boilerplate") %>
-<h3>Lists of All Professional</h3>
-<form action="/search" method="POST">
-    <input type="text" name="query" placeholder="Search professionals...">
-    <button type="submit">Search</button>
-</form>
 
-<div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1">
-            <% for(let professional of professionals) { %>
-                <a href="/search/<%= professional._id %>" class="">
-                    <div class="card col">
-                        <img src="<%= professional.image %>" class="card-img-top" alt="listing.image"
-                            style="height:15rem ">
-                        <div class="card-img-overlay"></div>
+<style>
+    body {
+        background-color: white;
+        color: #222;
+        
+    }
+    .container{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .page-header {
+        background-color: #222;
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .search-form {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .search-input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: 2px solid #222;
+        border-radius: 5px;
+        font-size: 1rem;
+        background-color: white;
+        color: #222;
+    }
+    
+    .search-input:focus {
+        outline: none;
+        border-color: #222;
+        box-shadow: 0 0 0 0.2rem rgba(34, 34, 34, 0.25);
+    }
+    
+    .search-btn {
+        background-color: #222;
+        color: white;
+        border: 2px solid #222;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .search-btn:hover {
+        background-color: white;
+        color: #222;
+        transform: translateY(-2px);
+    }
+    
+    .professional-card {
+        text-decoration: none;
+        color: inherit;
+        margin-bottom: 1.5rem;
+    }
+    
+    .professional-card:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .card {
+        border: 2px solid #222;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        background-color: white;
+        height: 100%;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(34, 34, 34, 0.15);
+    }
+    
+    .card-img-top {
+        height: 15rem;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+    
+    .card-body {
+        padding: 1.25rem;
+        background-color: white;
+    }
+    
+    .professional-name {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #222;
+        margin-bottom: 0.5rem;
+    }
+    
+    .professional-profession {
+        color: #666;
+        font-style: italic;
+        font-size: 0.95rem;
+    }
+    
+    .no-professionals {
+        text-align: center;
+        padding: 3rem;
+        color: #666;
+    }
+    
+    @media (max-width: 768px) {
+        .search-form {
+            flex-direction: column;
+        }
+        
+        .search-input {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .search-btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<!-- Added styled header section -->
+<div class="page-header">
+    <div class="container">
+        <h1 class="text-center mb-0">
+            <i class="fas fa-users me-3"></i>
+            Professional Directory
+        </h1>
+        <p class="text-center mb-0 mt-2 opacity-75">Find the right professional for your needs</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Enhanced search form with better styling -->
+
+    <!-- Enhanced professional cards grid -->
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
+        <% for(let professional of professionals) { %>
+            <div class="col">
+                <a href="/search/<%= professional._id %>" class="professional-card">
+                    <div class="card h-100">
+                        <img src="<%= professional.image %>" class="card-img-top" alt="<%= professional.name %>">
                         <div class="card-body">
-                            <p class="card-text">
-                                <b>
-                                    <%= professional.name %>
-                                </b><br>
-                                <i> <%= professional.profession %></i>
-                            </p>
+                            <div class="professional-name">
+                                <%= professional.name %>
+                            </div>
+                            <div class="professional-profession">
+                                <i class="fas fa-briefcase me-1"></i>
+                                <%= professional.profession %>
+                            </div>
                         </div>
                     </div>
                 </a>
+            </div>
+        <% } %>
+    </div>
 
-                <% } %>
+    <!-- Added empty state for when no professionals are found -->
+    <% if (professionals.length === 0) { %>
+        <div class="no-professionals">
+            <i class="fas fa-search fa-3x mb-3" style="color: #ccc;"></i>
+            <h4>No professionals found</h4>
+            <p>Try adjusting your search criteria or check back later.</p>
         </div>
-
-
+    <% } %>
+</div>

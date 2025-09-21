@@ -1,0 +1,46 @@
+<%- layout("/layout/boilerplate") %>
+
+<div class="container mt-5">
+  <h2 class="mb-4">My Bookings</h2>
+
+  <% if (bookings.length === 0) { %>
+    <p class="text-muted">You have no bookings yet.</p>
+  <% } else { %>
+    <div class="row">
+      <% bookings.forEach(booking => { %>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            
+            
+            <!-- Professional Image -->
+             <img src="<%= booking.professionalId.image %>" 
+              alt="Professional Image" 
+              class="card-img-top" 
+              style="width:100%; height:300px; object-fit:cover; border-radius:10px;">
+            <div class="card-body">
+              <!-- Professional Info -->
+              <h5 class="card-title"><%= booking.professionalId.name %></h5>
+              <p class="card-text">
+                <strong>Profession:</strong> <%= booking.professionalId.profession %><br>
+                <strong>Location:</strong> <%= booking.professionalId.location %><br>
+                <strong>Contact:</strong> <%= booking.professionalId.contact %>
+              </p>
+
+              <!-- Booking Info -->
+              <hr>
+              <p class="card-text">
+                <strong>Booking Type:</strong> <%= booking.bookingType %><br>
+                <strong>Date:</strong> <%= booking.bookingDate.toDateString() %><br>
+                <strong>Time:</strong> <%= booking.bookingTime %><br>
+                <strong>Booked By:</strong> <%= booking.userId.name %> (<%= booking.userId.email %>)
+              </p>
+            </div>
+
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+

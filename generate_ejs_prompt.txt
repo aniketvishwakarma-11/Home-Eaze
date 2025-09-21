@@ -1,0 +1,35 @@
+You are an AI assistant helping with my Node.js + Express + EJS project.
+
+I already have a `style.css` file in the `public` folder that is used across the project.  
+Now I need you to generate **three EJS view files** in the `views` folder:  
+1. `login.ejs`  
+2. `register.ejs`  
+3. `booking.ejs`  
+
+### Requirements:
+- All files must include proper HTML boilerplate with `<head>`, link to `/style.css`, and Bootstrap classes for responsiveness.  
+- **Login Page (login.ejs):**
+  - Form fields: `Email`, `Password`.
+  - A styled submit button.
+  - A link to "Register" if user doesn’t have an account.
+
+- **Register Page (register.ejs):**
+  - Form fields: `Name`, `Email`, `Password`, `Confirm Password`.
+  - A styled submit button.
+  - A link to "Login" if user already has an account.
+
+- **Booking Page (booking.ejs):**
+  - Form fields: `Booking Date` (date input), `Booking Time` (time input).
+  - Dropdown/select for `Booking Type`: options should be `Hour`, `Day`, `Week`, `Month`.
+  - A styled submit button.
+
+### Styling Notes:
+- All pages must have styling consistent with the rest of my project (`style.css` is already written).
+- Forms should be centered inside a container with a shadow/rounded corners (Bootstrap `card` style is okay).
+- Buttons should look clean, with hover effects.
+- Responsive layout should work on desktop and mobile.
+
+Now generate the code for:
+- `views/login.ejs`
+- `views/register.ejs`
+- `views/booking.ejs`

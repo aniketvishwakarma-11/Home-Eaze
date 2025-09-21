@@ -1,0 +1,37 @@
+<% layout("/layout/boilerplate") %>
+<div class="boxed-container">
+    <section class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="p-4 shadow rounded bg-white form-container">
+                    <h3 class="mb-4 text-dark">Book a Service</h3>
+                    <form action="/booking/<%= professional._id %>" method="POST">
+                        <div class="mb-3">
+                            <label for="bookingDate" class="form-label text-dark">Booking Date</label>
+                            <input type="date" class="form-control" id="bookingDate" name="bookingDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingTime" class="form-label text-dark">Booking Time</label>
+                            <input type="time" class="form-control" id="bookingTime" name="bookingTime" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingType" class="form-label text-dark">Booking Type</label>
+                            <select class="form-select" id="bookingType" name="bookingType" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="Hour">Hour</option>
+                                <option value="Day">Day</option>
+                                <option value="Week">Week</option>
+                                <option value="Month">Month</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label text-dark">Location</label>
+                            <input type="text" class="form-control" id="location" name="location" required>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Book Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

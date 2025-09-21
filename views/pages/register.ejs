@@ -1,0 +1,34 @@
+<% layout("/layout/boilerplate") %>
+<div class="boxed-container">
+    <section class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="p-4 shadow rounded bg-white form-container">
+                    <h3 class="mb-4 text-dark">Register</h3>
+                    <form action="/register" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label text-dark">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-dark">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label text-dark">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label text-dark">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Register</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Already have an account? <a href="/login">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

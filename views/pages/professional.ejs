@@ -4,7 +4,12 @@
     <img src="<%= professional.image %>" alt="<%= professional.name %>" style="width:200px;height:200px;">
     <p>Service: <%= professional.profession %></p>
     <p>Experience: <%= professional.experience %> years</p>
-    <p>Rate: &#8377;<%= professional.rate.perHour.toLocaleString("en-IN") %>perHour 
-            &#8377;<%= professional.rate.perDay.toLocaleString("en-IN") %>perDay</p>
+    <p>Rate: &#8377;<%= professional.pricing.perHour.toLocaleString("en-IN") %>perHour <br>
+            &#8377;<%= professional.pricing.perDay.toLocaleString("en-IN") %>perDay <br>
+        &#8377;<%= professional.pricing.perWeek.toLocaleString("en-IN") %>perWeek <br>
+            &#8377;<%= professional.pricing.perMonth.toLocaleString("en-IN") %>perMonth <br>
+        
+        </p>
     <p>Contact: <%= professional.contact %></p>
     <a href="/search">Back to all professionals</a>
+    <a href="/booking/<%= professional._id %>">Book</a>

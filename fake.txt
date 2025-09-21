@@ -53,12 +53,618 @@ const bookingSchema = new Schema({
 const Booking = mongoose.model('Booking', bookingSchema); //this here creates a collection named listings in the database
 module.exports = Booking; //exporting this model to be used in other files
 
+//home 
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="slideshow">
+        <div class="slide active" style="background-image: url('https://www.perfettotech.ae/wp-content/uploads/2024/02/MicrosoftTeams-image-100.jpg');"></div>
+        <div class="slide" style="background-image: url('https://media.istockphoto.com/id/1300836775/photo/young-indian-woman-in-gloves-clean-kitchen-counter.jpg?s=612x612&w=0&k=20&c=qwGZhXVEFJVCU9wJ044tUSdbrCiLuThGhO1_SrFkYlo=');"></div>
+        <div class="slide" style="background-image: url('https://surplus.lk/wp-content/uploads/2021/02/painter-services.jpg');"></div>
+        <div class="hero-content">
+        <h1>Home Services at your Door Step</h1>
+        
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-grid">
+        <div class="service-card">
+            <img src="https://img.icons8.com/color/96/vacuum-cleaner.png" alt="">
+            <h3>Cleaning</h3>
+            <p>Deep cleaning, dusting, mopping, and laundry services.</p>
+        </div>
+        <div class="service-card">
+            <img src="https://img.icons8.com/color/96/chef-hat.png" alt="">
+            <h3>Cooking</h3>
+            <p>Delicious home-cooked meals prepared to your taste.</p>
+        </div>
+        <div class="service-card">
+            <img src="https://img.icons8.com/color/96/baby.png" alt="">
+            <h3>Babysitting</h3>
+            <p>Trusted babysitters to take care of your children safely.</p>
+        </div>
+        </div>
+    </section>
+
+    
+        
+
+    <!-- Gallery -->
+    <section class="gallery">
+        <h2>Our Helpers at Work</h2>
+        <div class="gallery-grid">
+        <img src="https://cleanmyplace.in/assets/img/services/1.jpg" alt="Cleaning">
+        <img src="https://247wallst.com/wp-content/uploads/2020/04/imageForEntry9-bbt.jpg" alt="Cooking">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2024/6/430768791/YI/SV/DE/185965587/housemaid-babysitter-nanny.jpg" alt="Babysitting">
+        <img src="https://www.shutterstock.com/image-photo/create-service-engineer-indian-face-600nw-2645001265.jpg" alt="Maid Work">
+        <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1200x630_center,f_auto,q_auto:best/rockcms/2024-05/230412-cleaning-washing-machine-vl-2x1-75a523.jpg" alt="Laundry">
+        <img src="https://content.jdmagicbox.com/v2/comp/delhi/f5/011pxx11.xx11.230214100846.u2f5/catalogue/mr-yamin-malviya-nagar-delhi-1jaysumpcj.jpg" alt="Helper">
+        </div>
+    </section>
+
+
+     <section class="reviews">
+    <h2>What Our Customers Say</h2>
+    <div class="review-grid">
+      <div class="review-card">
+        <p class="review-text">"The maid service was excellent! Very professional and punctual."</p>
+        <div class="review-author">- Priya Sharma ⭐⭐⭐⭐⭐</div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"I booked a babysitter through HomeFix and she was amazing with my kids."</p>
+        <div class="review-author">- Rohan Mehta ⭐⭐⭐⭐☆</div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"Quick AC repair at an affordable price. Highly recommended!"</p>
+        <div class="review-author">- Sneha Kulkarni ⭐⭐⭐⭐⭐</div>
+      </div>
+    </div>
+</section>
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+        <h3 id="modalTitle">Booking Maid</h3>
+        <p>We will contact you shortly to confirm your booking.</p>
+        <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function scrollToMaids() {
+        document.getElementById('maids').scrollIntoView({behavior:'smooth'});
+        }
+        function openModal(name) {
+        document.getElementById('modalTitle').innerText = "Booking " + name;
+        document.getElementById('bookingModal').classList.add('active');
+        }
+        function closeModal() {
+        document.getElementById('bookingModal').classList.remove('active');
+        }
+        function submitForm(e) {
+        e.preventDefault();
+        alert("Thank you! We will reply soon.");
+        }
+        const slides = document.querySelectorAll('.slide');
+        let index = 0;
+
+        function showNextSlide() {
+        // remove active from current
+        slides[index].classList.remove('active');
+
+        // move to next
+        index = (index + 1) % slides.length;
+
+        // add active to new
+        slides[index].classList.add('active');
+        }
+
+        // change slide every 3 seconds
+        setInterval(showNextSlide, 3000);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+/* Hero */
+/* Hero */
+.hero {
+  width: 100%;        /* take full width without scrollbar issue */
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  background-size: cover;
+  inset: 0;
+}
+
+.hero-content {
+  position: absolute;
+  z-index: 1;
+  max-width: 700px;
+  top: 50%;
+  left: 0%;
+  transform: translate(20%, -50%);
+  text-align: left;
+}
+
+.hero-content ol{
+  list-style: circle;
+  font-size: 25px;
+  margin-left: 40px;
+}
+
+.hero h1 {
+  font-size: 70px;
+  margin-bottom: 20px;
+  line-height: 1;
+  color:#fefefe;
+  font-weight: 1000;
+
+}
+
+
+.hero button {
+  background: #e63946;
+  border: none;
+  padding: 15px 40px;
+  color: white;
+  font-size: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+.hero button:hover {
+  background: #c71c30;
+}
+
+.slideshow {
+  position: relative;
+  height: 100vh; /* full screen */
+  width: 100%;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  image-rendering: crisp-edges;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35); /* black overlay with 35% opacity */
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* Section General */
+section {
+  padding: 80px 20px;
+}
+
+/* Services */
+.services {
+  background: #fff;
+  text-align: center;
+}
+.services h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+.service-card {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+.service-card:hover {
+  transform: translateY(-10px);
+}
+.service-card img {
+  width: 80px;
+  margin-bottom: 20px;
+}
+.service-card h3 {
+  margin-bottom: 15px;
+}
+
+/* Maids */
+.maids {
+  background: #fefefe;
+}
+.maids h2 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+.maid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+.maid-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+.maid-card:hover {
+  transform: scale(1.05);
+}
+.maid-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+.maid-info {
+  padding: 25px;
+}
+.maid-info h3 {
+  margin-bottom: 10px;
+}
+.maid-info p {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+.maid-info button {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 5px;
+  transition: 0.3s;
+}
+.maid-info button:hover {
+  background: #c71c30;
+}
+
+/* Gallery */
+.gallery h2 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+.gallery-grid img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+.gallery-grid img:hover {
+  transform: scale(1.05);
+}
+
+/* Reviews */
+.reviews {
+  background: #fff;
+  text-align: center;
+  padding: 80px 20px;
+}
+.reviews h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: auto;
+}
+.review-card {
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.review-card:hover {
+  transform: translateY(-8px);
+}
+.review-text {
+  font-size: 18px;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+.review-author {
+  font-weight: bold;
+  color: #e63946;
+}
 
 
 
+/* Contact */
+.contact {
+  background: #fff;
+}
+.contact h2 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+.contact-form {
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+}
+.contact-form button {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+}
+.contact-form button:hover {
+  background: #c71c30;
+}
+
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+}
+.modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+.modal-content h3 {
+  margin-bottom: 20px;
+}
+.modal-content button {
+  background: #e63946;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+//index.j
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
+const path = require('path');
+const Booking = require("./models/professional.js")
+const User = require("./models/User.js");
+const booking= require("./models/booking.js")
+const port = 8080;
+const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate');
+const bcrypt = require("bcrypt");
 
 
 
+const MONOGO_URL = "mongodb://127.0.0.1:27017/home-fix";
+
+main()
+    .then(() => {
+        console.log("Connected to database");
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+
+async function main() {
+    await mongoose.connect(MONOGO_URL);
+}
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+app.engine('ejs', ejsMate); //this line is used to set ejs-mate as the template engine for ejs files
+app.use(express.static(path.join(__dirname, 'public'))); //to serve static files like css,js,images from the public folder
+
+
+app.get("/",(req,res)=>{
+    res.render("pages/index.ejs");
+})
+app.get("/search", async (req,res)=>{
+    const professionals = await Booking.find({});
+    res.render("pages/search.ejs",{professionals});
+});
+app.post("/search", async (req,res)=>{
+    const searchQuery = req.body.query?.trim();
+    console.log("Search Query:", searchQuery);
+
+    let professionals;
+    if (searchQuery) {
+        professionals = await Booking.find({
+            $or: [
+                { profession: { $regex: searchQuery, $options: "i" } },
+                { name: { $regex: searchQuery, $options: "i" } },
+                { location: { $regex: searchQuery, $options: "i" } }
+            ]
+        });
+    } else {
+        professionals = await Booking.find({});
+    }
+    res.render("pages/search.ejs",{professionals});
+});
+app.get("/search/:id", async (req,res)=>{
+    const {id} = req.params;
+    const professional = await Booking.findById(id);
+    res.render("pages/professional.ejs",{professional});
+});
+app.get("/contactUs",(req,res)=>{
+    res.render("pages/contact.ejs")
+})
+
+app.get("/login", (req, res) => {
+  res.render("pages/login.ejs"); 
+});
+
+app.get("/booking", (req, res) => {
+  res.render("pages/booking.ejs"); 
+});
+
+app.get("/register", (req, res) => {
+  res.render("pages/register.ejs");
+});
+
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // 1. Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).send("Invalid email or password");
+    }
+
+    // 2. Compare passwords
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).send("Invalid email or password");
+    }
+
+    
+    res.render("pages/booking.ejs"); 
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
+
+app.post("/booking/:id", async (req, res) => {
+  try {
+    const professional = await Booking.findById(req.params.id);
+    if (!professional) return res.status(404).send("Professional not found");
+
+    const newBooking = new booking({
+      professional: {
+        id: professional._id,
+        name: professional.name
+      },
+      customerName: req.body.name,
+      email: req.body.email,
+      bookingDate: req.body.bookingDate,
+      bookingTime: req.body.bookingTime,
+      bookingType: req.body.bookingType,
+      location: req.body.location
+    });
+
+    await newBooking.save();
+    res.redirect("/my-bookings"); // Or success page
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+app.post("/register", async (req, res) => {
+  try {
+    const { name, email, password, confirmPassword } = req.body;
+
+    // 1. Validate passwords
+    if (password !== confirmPassword) {
+      return res.status(400).send("Passwords do not match");
+    }
+
+    // 2. Check if email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).send("Email already registered");
+    }
+
+    // 3. Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // 4. Save user
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    await newUser.save();
+    console.log(email);
+    console.log(password);
+    // 5. Redirect to login after success
+    res.redirect("/login");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
+
+
+app.listen(port, () => {
+    console.log(`Listeining to port : ${port}`);
+});
 
 
 

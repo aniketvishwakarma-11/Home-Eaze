@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const bookingSchema = new Schema({
+/* ---------------------- Professional Schema ---------------------- */
+const professionalSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -9,8 +10,18 @@ const bookingSchema = new Schema({
   },
   profession: {
     type: String,
-    enum: ["Cleaning", "Cooking", "Babysitting"], 
-    required: true
+    enum: [
+      "Cleaning",
+      "Cooking",
+      "Babysitting",
+      "Laundry",
+      "Dish Washing",
+      "Gardening",
+      "senior-citizen caretaking",
+      "General Help"
+    ],
+    required: true,
+
   },
   pricing: {
     perHour: { type: Number, required: true },
@@ -34,7 +45,7 @@ const bookingSchema = new Schema({
   },
   contact: {
     type: String,
-    default: "Not Provided"
+    required: true
   },
   image: {
     type: String,
@@ -44,6 +55,50 @@ const bookingSchema = new Schema({
   }
 });
 
-const Booking = mongoose.model("Booking", bookingSchema);
+/* ---------------------- Booking Schema ---------------------- */
+const bookingSchema = new Schema({
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
+  professionalId: {
+    type: Schema.Types.ObjectId,
+    ref: "Professional",
+    required: true
+  },
+  bookingDate: { type: Date, required: true },
+  bookingTime: { type: String, required: true },
+  bookingType: { type: String, required: true },
+  location: { type: String, required: true }
+});
 
-module.exports = Booking;
+
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
+    trim: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+}, { timestamps: true });
+/* ---------------------- Models ---------------------- */
+const Professional = mongoose.model("Professional", professionalSchema);
+const Booking = mongoose.model("Booking", bookingSchema);
+const User = mongoose.model("User",userSchema);
+
+/* ---------------------- Exports ---------------------- */
+//
+// module.exports = mongoose.model("Professional", professionalSchema);
+
+module.exports = { Professional, Booking,User };
