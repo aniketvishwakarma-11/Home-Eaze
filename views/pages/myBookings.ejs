@@ -1,41 +1,41 @@
 <%- layout("/layout/boilerplate") %>
 
 <div class="container mt-5">
-  <h2 class="mb-4">My Bookings</h2>
+  <h2 class="mb-4 text-dark text-center" style="text-transform: uppercase; letter-spacing: 1px; position: relative;">
+    My Bookings
+    <span style="content: ''; width: 80px; height: 2px; background: #222222; display: block; margin: 0.5rem auto;"></span>
+  </h2>
 
   <% if (bookings.length === 0) { %>
-    <p class="text-muted">You have no bookings yet.</p>
+    <p class="text-muted text-center" style="font-size: 1.2rem;">You have no bookings yet.</p>
   <% } else { %>
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       <% bookings.forEach(booking => { %>
-        <div class="col-md-4 mb-4">
-          <div class="card shadow-sm h-100">
-            
-            
+        <div class="col">
+          <div class="card shadow-sm h-100" style="border: 2px solid #222222; transition: transform 0.3s ease;">
             <!-- Professional Image -->
-             <img src="<%= booking.professionalId.image %>" 
-              alt="Professional Image" 
-              class="card-img-top" 
-              style="width:100%; height:300px; object-fit:cover; border-radius:10px;">
+            <img src="<%= booking.professionalId.image || 'https://via.placeholder.com/300' %>" 
+                 alt="Professional Image" 
+                 class="card-img-top" 
+                 style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px 10px 0 0;">
             <div class="card-body">
               <!-- Professional Info -->
-              <h5 class="card-title"><%= booking.professionalId.name %></h5>
+              <h5 class="card-title text-dark fw-bold"><%= booking.professionalId.name %></h5>
               <p class="card-text">
-                <strong>Profession:</strong> <%= booking.professionalId.profession %><br>
-                <strong>Location:</strong> <%= booking.professionalId.location %><br>
-                <strong>Contact:</strong> <%= booking.professionalId.contact %>
+                <strong style="color: #222222;">Profession:</strong> <%= booking.professionalId.profession || 'N/A' %><br>
+                <strong style="color: #222222;">Location:</strong> <%= booking.professionalId.location || 'N/A' %><br>
+                <strong style="color: #222222;">Contact:</strong> <%= booking.professionalId.contact || 'N/A' %>
               </p>
 
               <!-- Booking Info -->
-              <hr>
+              <hr style="border-color: #222222; opacity: 0.3;">
               <p class="card-text">
-                <strong>Booking Type:</strong> <%= booking.bookingType %><br>
-                <strong>Date:</strong> <%= booking.bookingDate.toDateString() %><br>
-                <strong>Time:</strong> <%= booking.bookingTime %><br>
-                <strong>Booked By:</strong> <%= booking.userId.name %> (<%= booking.userId.email %>)
+                <strong style="color: #222222;">Booking Type:</strong> <%= booking.bookingType || 'N/A' %><br>
+                <strong style="color: #222222;">Date:</strong> <%= booking.bookingDate ? booking.bookingDate.toDateString() : 'N/A' %><br>
+                <strong style="color: #222222;">Time:</strong> <%= booking.bookingTime || 'N/A' %><br>
+                <strong style="color: #222222;">Booked By:</strong> <%= booking.userId.name || 'N/A' %> (<%= booking.userId.email || 'N/A' %>)
               </p>
             </div>
-
           </div>
         </div>
       <% }) %>
@@ -43,4 +43,61 @@
   <% } %>
 </div>
 
+<style>
+  .container {
+    padding-bottom: 2rem; /* Space for footer */
+  }
 
+  h2 {
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+  }
+
+  h2:hover {
+    transform: translateY(-2px);
+  }
+
+  .card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(34, 34, 34, 0.2);
+  }
+
+  .card-img-top {
+    transition: opacity 0.3s ease;
+  }
+
+  .card-img-top:hover {
+    opacity: 0.9;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+    background: #f9f9f9;
+  }
+
+  .card-text strong {
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .row-cols-md-2,
+    .row-cols-lg-3 {
+      row-cols-1;
+    }
+    .card {
+      margin: 0 1rem;
+    }
+    h2 {
+      font-size: 1.8rem;
+    }
+    .card-img-top {
+      height: 200px;
+    }
+  }
+</style>

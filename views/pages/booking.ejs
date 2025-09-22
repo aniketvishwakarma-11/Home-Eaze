@@ -3,35 +3,121 @@
     <section class="container py-5">
         <div class="row g-4">
             <div class="col-lg-6 offset-lg-3">
-                <div class="p-4 shadow rounded bg-white form-container">
-                    <h3 class="mb-4 text-dark">Book a Service</h3>
-                    <form action="/booking/<%= professional._id %>" method="POST">
+                <div class="p-4 shadow rounded bg-white form-container" style="border: 2px solid #222222;">
+                    <h3 class="mb-4 text-dark text-center" style="text-transform: uppercase; letter-spacing: 1px; position: relative;">
+                        Book a Service
+                        <span style="content: ''; width: 80px; height: 2px; background: #222222; display: block; margin: 0.5rem auto;"></span>
+                    </h3>
+                    <form action="/booking/<%= professional._id %>" method="POST" novalidate class="needs-validation" id="bookingForm">
                         <div class="mb-3">
-                            <label for="bookingDate" class="form-label text-dark">Booking Date</label>
-                            <input type="date" class="form-control" id="bookingDate" name="bookingDate" required>
+                            <label for="bookingDate" class="form-label text-dark fw-bold">Booking Date</label>
+                            <input type="date" class="form-control" id="bookingDate" name="bookingDate" required style="border-color: #222222; transition: border-color 0.3s ease;" min="<%= new Date().toISOString().split('T')[0] %>">
+                            <div class="invalid-feedback">Please select a valid date (today or later).</div>
                         </div>
                         <div class="mb-3">
-                            <label for="bookingTime" class="form-label text-dark">Booking Time</label>
-                            <input type="time" class="form-control" id="bookingTime" name="bookingTime" required>
+                            <label for="bookingTime" class="form-label text-dark fw-bold">Booking Time</label>
+                            <input type="time" class="form-control" id="bookingTime" name="bookingTime" required style="border-color: #222222; transition: border-color 0.3s ease;">
+                            <div class="invalid-feedback">Please select a valid time (HH:MM format).</div>
                         </div>
                         <div class="mb-3">
-                            <label for="bookingType" class="form-label text-dark">Booking Type</label>
-                            <select class="form-select" id="bookingType" name="bookingType" required>
-                                <option selected disabled value="">Choose...</option>
+                            <label for="bookingType" class="form-label text-dark fw-bold">Booking Type</label>
+                            <select class="form-select" id="bookingType" name="bookingType" required style="border-color: #222222; transition: border-color 0.3s ease;">
+                                <option value="">Choose...</option>
                                 <option value="Hour">Hour</option>
                                 <option value="Day">Day</option>
                                 <option value="Week">Week</option>
                                 <option value="Month">Month</option>
                             </select>
+                            <div class="invalid-feedback">Please select a booking type.</div>
                         </div>
-                        <div class="mb-3">
-                            <label for="location" class="form-label text-dark">Location</label>
-                            <input type="text" class="form-control" id="location" name="location" required>
+                        <div class="mb-4">
+                            <label for="location" class="form-label text-dark fw-bold">Location</label>
+                            <input type="text" class="form-control" id="location" name="location" required style="border-color: #222222; transition: border-color 0.3s ease;" minlength="2" maxlength="100">
+                            <div class="invalid-feedback">Please enter a location (2-100 characters).</div>
                         </div>
-                        <button type="submit" class="btn btn-dark w-100">Book Now</button>
+                        <button type="submit" class="btn btn-dark w-100 py-2" style="background-color: #222222; border-radius: 25px; transition: all 0.3s ease;">
+                            Book Now
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 </div>
+
+<style>
+    .boxed-container {
+        min-height: calc(100vh - 56px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 56px;
+    }
+
+    .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(34, 34, 34, 0.2);
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #444444;
+        box-shadow: 0 0 5px rgba(34, 34, 34, 0.2);
+    }
+
+    .btn-dark:hover {
+        background-color: #444444;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(34, 34, 34, 0.2);
+    }
+
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 2rem;
+        }
+        .col-lg-6.offset-lg-3 {
+            padding: 0 1rem;
+        }
+    }
+
+    /* Custom validation styles */
+    .was-validated .form-control:invalid,
+    .was-validated .form-select:invalid {
+        border-color: #dc3545;
+    }
+
+    .was-validated .form-control:valid,
+    .was-validated .form-select:valid {
+        border-color: #28a745;
+    }
+
+    .invalid-feedback {
+        display: none;
+    }
+
+    .was-validated .form-control:invalid ~ .invalid-feedback,
+    .was-validated .form-select:invalid ~ .invalid-feedback {
+        display: block;
+    }
+</style>
+
+<script>
+    // Enable Bootstrap validation on form submission
+    (function() {
+        'use strict';
+        const form = document.getElementById('bookingForm');
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    })();
+</script>

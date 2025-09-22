@@ -1,15 +1,256 @@
-<%- layout("/layout/boilerplate") %>
+<head>
+    <link rel="stylesheet" href="/css/professional.css">
+</head>
 
-    <h3>Details of <%= professional.name %></h3>
-    <img src="<%= professional.image %>" alt="<%= professional.name %>" style="width:200px;height:200px;">
-    <p>Service: <%= professional.profession %></p>
-    <p>Experience: <%= professional.experience %> years</p>
-    <p>Rate: &#8377;<%= professional.pricing.perHour.toLocaleString("en-IN") %>perHour <br>
-            &#8377;<%= professional.pricing.perDay.toLocaleString("en-IN") %>perDay <br>
-        &#8377;<%= professional.pricing.perWeek.toLocaleString("en-IN") %>perWeek <br>
-            &#8377;<%= professional.pricing.perMonth.toLocaleString("en-IN") %>perMonth <br>
-        
+<div class="professional-container">
+    <h3>Details of <%= professional.name || 'Unknown Professional' %>
+    </h3>
+    <div class="text-center mb-4">
+        <img src="<%= professional.image || 'https://via.placeholder.com/250' %>"
+            alt="<%= professional.name || 'Professional' %>" class="professional-img">
+    </div>
+    <div class="info-section">
+        <p><i class="fas fa-briefcase"></i> <strong>Service:</strong>
+            <%= professional.profession || 'N/A' %>
         </p>
-    <p>Contact: <%= professional.contact %></p>
-    <a href="/search">Back to all professionals</a>
-    <a href="/booking/<%= professional._id %>">Book</a>
+        <p><i class="fas fa-star"></i> <strong>Experience:</strong>
+            <%= professional.experience ? professional.experience + ' years' : 'N/A' %>
+                <% if (professional.experience) { %>
+                    <div class="experience-bar">
+                        <div class="experience-bar-fill"></div>
+                    </div>
+                    <% } %>
+        </p>
+        <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong>
+            <%= professional.location || 'N/A' %>
+        </p>
+        <p><i class="fas fa-check-circle"></i> <strong>Availability:</strong>
+            <span class="<%= professional.availability ? 'availability-true' : 'availability-false' %>">
+                <%= professional.availability ? 'Available' : 'Not Available' %>
+            </span>
+        </p>
+        <p><i class="fas fa-phone"></i> <strong>Contact:</strong>
+            <%= professional.contact || 'N/A' %>
+        </p>
+    </div>
+    <div class="pricing-section">
+        <p><i class="fas fa-rupee-sign"></i> <strong>Rate:</strong></p>
+        <p><i class="far fa-clock"></i> <strong>Hourly:</strong> ₹<%= professional.pricing?.perHour ?
+                professional.pricing.perHour.toLocaleString("en-IN") : 'N/A' %>
+        </p>
+        <p><i class="far fa-calendar-day"></i> <strong>Daily:</strong> ₹<%= professional.pricing?.perDay ?
+                professional.pricing.perDay.toLocaleString("en-IN") : 'N/A' %>
+        </p>
+        <p><i class="far fa-calendar-week"></i> <strong>Weekly:</strong> ₹<%= professional.pricing?.perWeek ?
+                professional.pricing.perWeek.toLocaleString("en-IN") : 'N/A' %>
+        </p>
+        <p><i class="far fa-calendar-alt"></i> <strong>Monthly:</strong> ₹<%= professional.pricing?.perMonth ?
+                professional.pricing.perMonth.toLocaleString("en-IN") : 'N/A' %>
+        </p>
+    </div>
+    <div class="button-group">
+        <a href="/search" class="btn btn-back">Back to All Professionals</a>
+        <a href="/booking/<%= professional._id || '' %>" class="btn btn-custom">Book Now</a>
+    </div>
+</div>
+
+<style>
+    
+    body {
+        background-color: #ffffff;
+        color: #222222;
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.7;
+        margin: 0;
+        padding: 0;
+    }
+
+    .professional-container {
+        max-width: 900px;
+        margin: 3rem auto;
+        padding: 2.5rem;
+        background: #ffffff;
+        border: 2px solid #222222;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(34, 34, 34, 0.15);
+        transition: transform 0.3s ease;
+    }
+
+    .professional-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(34, 34, 34, 0.2);
+    }
+
+    .professional-img {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #222222;
+        margin-bottom: 2rem;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .professional-img:hover {
+        transform: scale(1.05);
+    }
+
+    h3 {
+        color: #222222;
+        font-weight: 700;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+    }
+
+    h3::after {
+        content: '';
+        width: 80px;
+        height: 2px;
+        background: #222222;
+        display: block;
+        margin: 0.5rem auto;
+    }
+
+    .info-section,
+    .pricing-section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: #f9f9f9;
+        border-left: 5px solid #222222;
+        border-radius: 10px;
+        transition: background 0.3s ease;
+    }
+
+    .info-section:hover,
+    .pricing-section:hover {
+        background: #f0f0f0;
+    }
+
+    .info-section p,
+    .pricing-section p {
+        margin: 0.7rem 0;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .info-section p strong,
+    .pricing-section p strong {
+        font-weight: 600;
+        color: #222222;
+        min-width: 120px;
+    }
+
+    .availability-true {
+        color: #28a745;
+        font-weight: 600;
+        background: #e6f4ea;
+        padding: 0.2rem 0.6rem;
+        border-radius: 10px;
+    }
+
+    .availability-false {
+        color: #dc3545;
+        font-weight: 600;
+        background: #f8d7da;
+        padding: 0.2rem 0.6rem;
+        border-radius: 10px;
+    }
+
+    .experience-bar {
+        margin-top: 0.5rem;
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .experience-bar-fill {
+        height: 100%;
+        background: #222222;
+        width: <%=professional.experience ? Math.min(professional.experience * 10, 100): 0 %>%;
+        transition: width 0.5s ease;
+    }
+
+    .btn-custom {
+        background-color: #222222;
+        color: #ffffff;
+        border: none;
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 25px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-custom:hover {
+        background-color: #444444;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(34, 34, 34, 0.2);
+    }
+
+    .btn-back {
+        background-color: transparent;
+        color: #222222;
+        border: 2px solid #222222;
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 25px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background-color: #222222;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(34, 34, 34, 0.2);
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    @media (max-width: 576px) {
+        .professional-img {
+            width: 180px;
+            height: 180px;
+        }
+
+        .professional-container {
+            padding: 1.5rem;
+            margin: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+        }
+
+        .info-section p,
+        .pricing-section p {
+            font-size: 1rem;
+        }
+
+        .btn-custom,
+        .btn-back {
+            padding: 0.6rem 1.5rem;
+            font-size: 1rem;
+        }
+    }
+</style>
+

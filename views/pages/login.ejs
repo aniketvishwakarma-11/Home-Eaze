@@ -3,24 +3,74 @@
     <section class="container py-5">
         <div class="row g-4">
             <div class="col-lg-6 offset-lg-3">
-                <div class="p-4 shadow rounded bg-white form-container">
-                    <h3 class="mb-4 text-dark">Login</h3>
+                <div class="p-4 shadow rounded bg-white form-container" style="border: 2px solid #222222;">
+                    <h3 class="mb-4 text-dark text-center" style="text-transform: uppercase; letter-spacing: 1px; position: relative;">
+                        Login
+                        <span style="content: ''; width: 60px; height: 2px; background: #222222; display: block; margin: 0.5rem auto;"></span>
+                    </h3>
                     <form action="/login" method="POST">
                         <div class="mb-3">
-                            <label for="email" class="form-label text-dark">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <label for="email" class="form-label text-dark fw-bold">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required style="border-color: #222222; transition: border-color 0.3s ease;">
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label text-dark">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                        <div class="mb-4">
+                            <label for="password" class="form-label text-dark fw-bold">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required style="border-color: #222222; transition: border-color 0.3s ease;">
                         </div>
-                        <button type="submit" class="btn btn-dark w-100">Login</button>
+                        <button type="submit" class="btn btn-dark w-100 py-2" style="background-color: #222222; border-radius: 25px; transition: all 0.3s ease;">
+                            Login
+                        </button>
                     </form>
                     <div class="text-center mt-3">
-                        <p>Don't have an account? <a href="/register">Register</a></p>
+                        <p class="mb-0">Don't have an account? <a href="/register" style="color: #222222; text-decoration: underline; transition: color 0.3s ease;">Register</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
+
+<style>
+    .boxed-container {
+        min-height: calc(100vh - 56px); /* Adjust based on navbar height */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 56px; /* Match navbar height */
+    }
+
+    .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(34, 34, 34, 0.2);
+    }
+
+    .form-control:focus {
+        border-color: #444444;
+        box-shadow: 0 0 5px rgba(34, 34, 34, 0.2);
+    }
+
+    .btn-dark:hover {
+        background-color: #444444;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(34, 34, 34, 0.2);
+    }
+
+    a:hover {
+        color: #444444;
+    }
+
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 2rem;
+        }
+        .col-lg-6.offset-lg-3 {
+            padding: 0 1rem;
+        }
+    }
+</style>

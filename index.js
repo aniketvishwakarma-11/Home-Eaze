@@ -9,6 +9,10 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const bcrypt = require("bcrypt");
 const session = require("express-session"); // ✅ Session for login tracking
+const Joi = require('joi');
+const { bookingSchema } = require('./schema');
+const ExpressError = require("./utils/ExpressError.js");
+
 
 
 // ------------------ DATABASE ------------------
@@ -42,7 +46,23 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-
+const validateBooking = (req, res, next) => {
+    const formData = {
+        bookingDate: req.body.bookingDate,
+        bookingTime: req.body.bookingTime,
+        bookingType: req.body.bookingType,
+        location: req.body.location,
+    };
+    const { error } = bookingSchema.validate(formData, { abortEarly: false });
+    if (error) {
+        const errorMessages = error.details.map(detail => detail.message).join(', ');
+        return next(new ExpressError(errorMessages, 400)); // Changed order: message, statusCode
+    }
+    if (!req.params.id) {
+        return next(new ExpressError('Professional ID is required', 400));
+    }
+    next();
+};
 // ------------------ ROUTES ------------------
 
 // Home
@@ -190,7 +210,7 @@ app.get("/booking/:id", isLoggedIn, async (req, res) => {
 
 
 // Create Booking (with professional ID)
-app.post("/booking/:id", isLoggedIn, async (req, res) => {
+app.post("/booking/:id", isLoggedIn, validateBooking,async (req, res) => {
   console.log("POST route reached!");
   try {
     const { id } = req.params; // Professional ID
@@ -222,8 +242,7 @@ app.post("/booking/:id", isLoggedIn, async (req, res) => {
     // Redirect or render confirmation page
     res.redirect(`/myBookings`);
   } catch (err) {
-    console.error("Error in booking route:", err);
-    res.status(500).send("Server error");
+    next(new ExpressError(err.message, 500));
   }
 });
 app.get("/myBookings", isLoggedIn, async (req, res) => {
@@ -239,6 +258,16 @@ app.get("/myBookings", isLoggedIn, async (req, res) => {
   }
 });
 
+
+// Update the 404 middleware
+app.use((req, res, next) => {
+    next(new ExpressError("Page Not Found", 404)); // Changed order: message, statusCode
+});
+app.use((err, req, res, next) => {
+    let { statusCode = 500, message = "Something went Wrong" } = err;
+    res.status(statusCode).render("pages/error.ejs", { message });
+    // res.status(statusCode).send(message);
+})
 // ------------------ SERVER ------------------
 app.listen(port, () => {
     console.log(`🚀 Listening on port: ${port}`);
