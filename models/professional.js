@@ -55,6 +55,18 @@ const professionalSchema = new Schema({
   }
 });
 
+// In models/professional.js
+professionalSchema.pre("deleteOne", { document: true, query: false }, async function (next) {
+  try {
+    const deletedBookings = await Booking.deleteMany({ professionalId: this._id });
+    console.log(`Deleted ${deletedBookings.deletedCount} bookings for professional ${this._id}`);
+    next();
+  } catch (err) {
+    console.error("Error in pre-deleteOne middleware:", err);
+    next(err);
+  }
+});
+
 /* ---------------------- Booking Schema ---------------------- */
 const bookingSchema = new Schema({
   userId: {

@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const path = require('path');
-const { Professional, Booking ,User} = require("./models/professional.js");
- // ✅ Professional model         // ✅ User model         // ✅ Booking model
+const { Professional, Booking, User } = require("./models/professional.js");
+// ✅ Professional model         // ✅ User model         // ✅ Booking model
 const port = 8080;
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
@@ -12,8 +12,14 @@ const session = require("express-session"); // ✅ Session for login tracking
 const Joi = require('joi');
 const { bookingSchema } = require('./schema');
 const ExpressError = require("./utils/ExpressError.js");
+const wrapAsync = require("./utils/wrapAsync.js");
+const flash = require('connect-flash');
 
 
+
+const admin = require("./routes/admin.js");
+const professionalRoutes = require("./routes/adminProfessional.js");
+const { wrap } = require('module');
 
 // ------------------ DATABASE ------------------
 const MONOGO_URL = "mongodb://127.0.0.1:27017/home-fix";
@@ -31,7 +37,7 @@ async function main() {
 }
 
 
-// ------------------ APP SETUP ------------------
+// ------------------ APP SETUP/MIDDLEWAREA ------------------
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -39,12 +45,34 @@ app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+
 // ✅ Session setup
 app.use(session({
     secret: "supersecretkey",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        secure: false, // change to true if using HTTPS
+        maxAge: 1000 * 60 * 60 * 24, // 1 day
+    }
 }));
+
+app.use(flash());
+
+// Middleware to pass flash messages to all templates
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success'); // for success messages
+    res.locals.error = req.flash('error');     // for error messages
+    next();
+});
+
+app.use("/admin", admin);
+app.use("/professional", professionalRoutes);
+
+
 
 const validateBooking = (req, res, next) => {
     const formData = {
@@ -71,12 +99,12 @@ app.get("/", (req, res) => {
 });
 
 // Search Professionals
-app.get("/search", async (req, res) => {
+app.get("/search", wrapAsync(async (req, res) => {
     const professionals = await Professional.find({});
     res.render("pages/search.ejs", { professionals });
-});
+}));
 
-app.post("/search", async (req, res) => {
+app.post("/search", wrapAsync(async (req, res) => {
     const searchQuery = req.body.query?.trim();
     console.log("Search Query:", searchQuery);
 
@@ -93,14 +121,14 @@ app.post("/search", async (req, res) => {
         professionals = await Professional.find({});
     }
     res.render("pages/search.ejs", { professionals });
-});
+}));
 
 // Professional Details
-app.get("/search/:id", async (req, res) => {
+app.get("/search/:id", wrapAsync(async (req, res) => {
     const { id } = req.params;
     const professional = await Professional.findById(id);
     res.render("pages/professional.ejs", { professional });
-});
+}));
 
 // Contact
 app.get("/contactUs", (req, res) => {
@@ -115,70 +143,65 @@ app.get("/register", (req, res) => {
     res.render("pages/register.ejs");
 });
 
-app.post("/register", async (req, res) => {
-    try {
-        const { name, email, password, confirmPassword } = req.body;
+app.post("/register", wrapAsync(async (req, res) => {
+    const { name, email, password, confirmPassword } = req.body;
 
-        if (password !== confirmPassword) {
-            return res.status(400).send("Passwords do not match");
-        }
-
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).send("Email already registered");
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newUser = new User({
-            name,
-            email,
-            password: hashedPassword,
-        });
-
-        await newUser.save();
-
-        res.redirect("/login");
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Server error");
+    if (password !== confirmPassword) {
+        req.flash('error', 'Passwords do not match');
+        return res.redirect('/register');
     }
-});
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+        req.flash('error', 'Email already registered');
+        return res.redirect('/register');
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+        name,
+        email,
+        password: hashedPassword,
+    });
+
+    await newUser.save();
+
+    req.flash('success', 'Registration successful! You can now log in.');
+    res.redirect('/login');
+}));
 
 // Login Page
 app.get("/login", (req, res) => {
     res.render("pages/login.ejs");
 });
 
-app.post("/login", async (req, res) => {
-    try {
-        const { email, password } = req.body;
+app.post("/login", wrapAsync(async (req, res) => {
+    const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).send("Invalid email or password");
-        }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).send("Invalid email or password");
-        }
-
-        // ✅ Save login state in session
-        req.session.userId = user._id;
-        req.session.userName = user.name;
-        const professionals = await Professional.find({});
-        // res.render("pages/search.ejs", { professionals });
-        res.redirect("/search");
-         
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Server error");
+    const user = await User.findOne({ email });
+    if (!user) {
+        req.flash('error', 'Invalid email or password');
+        return res.redirect('/login');
     }
-});
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        req.flash('error', 'Invalid email or password');
+        return res.redirect('/login');
+    }
+
+    // ✅ Save login state in session
+    req.session.userId = user._id;
+    req.session.userName = user.name;
+    const professionals = await Professional.find({});
+    // res.render("pages/search.ejs", { professionals });
+    req.flash('success', `Welcome back, ${user.name}!`);
+    res.redirect('/search');
+}));
 
 // Logout
-app.post("/logout", (req, res) => {
+app.get("/logout", (req, res) => {
     req.session.destroy(() => {
         res.redirect("/login");
     });
@@ -197,22 +220,19 @@ function isLoggedIn(req, res, next) {
 
 // Booking Page
 // Booking Page
-app.get("/booking/:id", isLoggedIn, async (req, res) => {
-    try {
-        const professional = await Professional.findById(req.params.id);
-        if (!professional) return res.status(404).send("Professional not found");
-        res.render("pages/booking.ejs", { professional });
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-});
+app.get("/booking/:id", isLoggedIn, wrapAsync(async (req, res) => {
+
+    const professional = await Professional.findById(req.params.id);
+    if (!professional) return res.status(404).send("Professional not found");
+    res.render("pages/booking.ejs", { professional });
+
+}));
 
 
 
 // Create Booking (with professional ID)
-app.post("/booking/:id", isLoggedIn, validateBooking,async (req, res) => {
-  console.log("POST route reached!");
-  try {
+app.post("/booking/:id", isLoggedIn, validateBooking, wrapAsync(async (req, res) => {
+    console.log("POST route reached!");
     const { id } = req.params; // Professional ID
     console.log("Booking request for ID:", id);
 
@@ -220,7 +240,7 @@ app.post("/booking/:id", isLoggedIn, validateBooking,async (req, res) => {
     console.log("Found Professional:", professional);
 
     if (!professional) {
-      return res.status(404).send("❌ Professional not found");
+        return res.status(404).send("❌ Professional not found");
     }
 
     // Extract booking details from form/body
@@ -228,12 +248,12 @@ app.post("/booking/:id", isLoggedIn, validateBooking,async (req, res) => {
 
     // Create new booking document
     const newBooking = new Booking({
-      userId: req.session.userId,        // ✅ correct
-      professionalId: professional._id,  // ✅ correct
-      bookingDate,
-      bookingTime,
-      bookingType,
-      location
+        userId: req.session.userId,        // ✅ correct
+        professionalId: professional._id,  // ✅ correct
+        bookingDate,
+        bookingTime,
+        bookingType,
+        location
     });
 
     await newBooking.save();
@@ -241,22 +261,21 @@ app.post("/booking/:id", isLoggedIn, validateBooking,async (req, res) => {
 
     // Redirect or render confirmation page
     res.redirect(`/myBookings`);
-  } catch (err) {
-    next(new ExpressError(err.message, 500));
-  }
-});
-app.get("/myBookings", isLoggedIn, async (req, res) => {
-  try {
-    // const bookings = await Booking.find({ userId: req.session.userId }).populate("professionalId");
-    const bookings = await Booking.find({ userId: req.session.userId })
-      .populate("professionalId")   // shows professional details
-      .populate("userId"); 
-    res.render("pages/myBookings.ejs", { bookings });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Server error");
-  }
-});
+}));
+
+
+app.get("/myBookings", isLoggedIn, wrapAsync(async (req, res) => {
+    try {
+        // const bookings = await Booking.find({ userId: req.session.userId }).populate("professionalId");
+        const bookings = await Booking.find({ userId: req.session.userId })
+            .populate("professionalId")   // shows professional details
+            .populate("userId");
+        res.render("pages/myBookings.ejs", { bookings });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server error");
+    }
+}));
 
 
 // Update the 404 middleware

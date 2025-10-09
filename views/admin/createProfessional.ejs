@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Professional</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Create New Professional</h2>
+    <%- include("../includes/flash.ejs") %>
+
+    <form action="/professional/create" method="POST" class="shadow p-4 rounded bg-light">
+
+      <!-- Name -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required>
+      </div>
+
+      <!-- Profession Dropdown -->
+      <div class="mb-3">
+        <label for="profession" class="form-label">Profession</label>
+        <select class="form-select" id="profession" name="profession" required>
+          <option value="">-- Select Profession --</option>
+          <option value="Cleaning">Cleaning</option>
+          <option value="Cooking">Cooking</option>
+          <option value="Babysitting">Babysitting</option>
+          <option value="Laundry">Laundry</option>
+          <option value="Dish Washing">Dish Washing</option>
+          <option value="Gardening">Gardening</option>
+          <option value="senior-citizen caretaking">Senior-Citizen Caretaking</option>
+          <option value="General Help">General Help</option>
+        </select>
+      </div>
+
+      <!-- Pricing -->
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">Per Hour (₹)</label>
+          <input type="number" class="form-control" name="pricing[perHour]" min="0" required>
+        </div>
+        <div class="col">
+          <label class="form-label">Per Day (₹)</label>
+          <input type="number" class="form-control" name="pricing[perDay]" min="0" required>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">Per Week (₹)</label>
+          <input type="number" class="form-control" name="pricing[perWeek]" min="0" required>
+        </div>
+        <div class="col">
+          <label class="form-label">Per Month (₹)</label>
+          <input type="number" class="form-control" name="pricing[perMonth]" min="0" required>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div class="mb-3">
+        <label for="experience" class="form-label">Experience (Years)</label>
+        <input type="number" class="form-control" id="experience" name="experience" min="0" required>
+      </div>
+
+      <!-- Location -->
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" class="form-control" id="location" name="location" placeholder="Enter city or area" required>
+      </div>
+
+      <!-- Availability -->
+      <div class="mb-3">
+        <label class="form-label">Availability</label>
+        <select class="form-select" name="availability" required>
+          <option value="true">Available</option>
+          <option value="false">Not Available</option>
+        </select>
+      </div>
+
+      <!-- Contact -->
+      <div class="mb-3">
+        <label for="contact" class="form-label">Contact Number</label>
+        <input type="tel" class="form-control" id="contact" name="contact" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+      </div>
+
+      <!-- Image -->
+      <div class="mb-3">
+        <label for="image" class="form-label">Profile Image URL</label>
+        <input type="url" class="form-control" id="image" name="image" placeholder="Optional (leave blank for default)">
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-dark w-100">Create Professional</button>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 body {
   background-color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  padding-top: 100px !important;
 }
 
 .btn-custom {
@@ -20,7 +21,7 @@ body {
 }
 
 .navbar {
-  position: sticky;
+  position: fixed !important;
   top: 0;
   width: 100%;
   background-color: #222;

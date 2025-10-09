@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Professional</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Edit Professional</h2>
+    <%- include("../includes/flash.ejs") %>
+
+    <form action="/professional/edit/<%= professional._id %>" method="POST" class="card p-4 shadow-sm">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" name="name" value="<%= professional.name %>" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Profession</label>
+        <select name="profession" class="form-select" required>
+          <% ["Cleaning","Cooking","Babysitting","Laundry","Dish Washing","Gardening","senior-citizen caretaking","General Help"].forEach(p => { %>
+            <option value="<%= p %>" <%= professional.profession === p ? "selected" : "" %>><%= p %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <label>Per Hour</label>
+          <input type="number" name="pricing[perHour]" value="<%= professional.pricing.perHour %>" class="form-control" required>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label>Per Day</label>
+          <input type="number" name="pricing[perDay]" value="<%= professional.pricing.perDay %>" class="form-control" required>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label>Per Week</label>
+          <input type="number" name="pricing[perWeek]" value="<%= professional.pricing.perWeek %>" class="form-control" required>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label>Per Month</label>
+          <input type="number" name="pricing[perMonth]" value="<%= professional.pricing.perMonth %>" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Experience (Years)</label>
+        <input type="number" name="experience" value="<%= professional.experience %>" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input type="text" name="location" value="<%= professional.location %>" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Contact</label>
+        <input type="text" name="contact" value="<%= professional.contact %>" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Image URL</label>
+        <input type="text" name="image" value="<%= professional.image %>" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-dark w-100">Update Professional</button>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

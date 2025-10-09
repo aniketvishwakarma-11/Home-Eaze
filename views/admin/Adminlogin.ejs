@@ -8,7 +8,7 @@
                         Login
                         <span style="content: ''; width: 60px; height: 2px; background: #222222; display: block; margin: 0.5rem auto;"></span>
                     </h3>
-                    <form action="/login" method="POST">
+                    <form action="/admin/login" method="POST">
                         <div class="mb-3">
                             <label for="email" class="form-label text-dark fw-bold">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required style="border-color: #222222; transition: border-color 0.3s ease;">
@@ -20,13 +20,13 @@
                         <button type="submit" class="btn btn-dark w-100 py-2" style="background-color: #222222; border-radius: 25px; transition: all 0.3s ease;">
                             Login
                         </button>
+                        <div class="text-center mt-3">
+                        <p class="mb-0">Are you a User? <a href="/login" style="color: #222222; text-decoration: underline; transition: color 0.3s ease;">Login</a></p>
+                    </div>
                     </form>
-                    <div class="text-center mt-3">
+                    <!-- <div class="text-center mt-3">
                         <p class="mb-0">Don't have an account? <a href="/register" style="color: #222222; text-decoration: underline; transition: color 0.3s ease;">Register</a></p>
-                    </div>
-                    <div class="text-center mt-3">
-                        <p class="mb-0">Are you a admin? <a href="/admin/login" style="color: #222222; text-decoration: underline; transition: color 0.3s ease;">Admin</a></p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
