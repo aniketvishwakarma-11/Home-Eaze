@@ -1,9 +1,10 @@
+require('dotenv').config(); // Load environment variables from .env file
+
 const mongoose = require('mongoose');
 const initData = require('./data.js');
 const Listing = require("../models/professional.js");
 
-// const MONGO_URL = "mongodb://127.0.0.1:27017/home-fix";
-const MONOGO_URL = "mongodb+srv://aniketvis675_db_user:helloAniket@cluster0.0gqhff9.mongodb.net/home-eaze?retryWrites=true&w=majority&appName=Cluster0";
+const MONOGO_URL = process.env.ATLASDB_URL; // Use the URL from the .env file
 
 main()
     .then(() => {
