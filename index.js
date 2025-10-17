@@ -22,7 +22,7 @@ const professionalRoutes = require("./routes/adminProfessional.js");
 const { wrap } = require('module');
 
 // ------------------ DATABASE ------------------
-const MONOGO_URL = "mongodb://127.0.0.1:27017/home-fix";
+const MONOGO_URL = "mongodb+srv://aniketvis675_db_user:helloAniket@cluster0.0gqhff9.mongodb.net/home-eaze?retryWrites=true&w=majority&appName=Cluster0";
 
 main()
     .then(() => {
