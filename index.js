@@ -22,7 +22,9 @@ const professionalRoutes = require("./routes/adminProfessional.js");
 const { wrap } = require('module');
 
 // ------------------ DATABASE ------------------
-const MONOGO_URL = "mongodb+srv://aniketvis675_db_user:helloAniket@cluster0.0gqhff9.mongodb.net/home-eaze?retryWrites=true&w=majority&appName=Cluster0";
+require('dotenv').config(); // Load environment variables from .env file
+
+const MONOGO_URL = process.env.ATLASDB_URL; // Use the URL from the .env file
 
 main()
     .then(() => {
