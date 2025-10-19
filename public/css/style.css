@@ -1,4 +1,6 @@
-/* Body Black Background */
+/* =======================
+   🌑 GENERAL PAGE STYLING
+   ======================= */
 body {
   display: flex;
   flex-direction: column;
@@ -8,6 +10,7 @@ body {
   padding-top: 100px !important;
 }
 
+/* Buttons */
 .btn-custom {
   background-color: #222;
   color: #fff;
@@ -23,19 +26,6 @@ body {
   margin-top: 5rem;
 }
 
-.navbar {
-  position: fixed !important;
-  top: 0;
-  width: 100%;
-  background-color: #222;
-  padding: 15px 40px;
-  z-index: 1000;
-}
-
-.nav-link {
-  color: white !important;
-}
-
 /* Boxed Container */
 .boxed-container {
   max-width: 1200px;
@@ -44,11 +34,6 @@ body {
   background-color: #fff;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-}
-
-/* Left Form Container */
-.form-container {
-  background-color: #fff;
 }
 
 /* Buttons Black Theme */
@@ -62,12 +47,14 @@ body {
   color: #fff;
 }
 
-/* Info Card Styling */
+/* Info Card */
 .info-card h6 {
   font-weight: 600;
 }
 
-/* Footer */
+/* =======================
+   🦶 FOOTER
+   ======================= */
 .footer {
   background-color: #000;
   color: #fff;
@@ -84,13 +71,11 @@ body {
   text-decoration: underline;
 }
 
-/* Footer Headings */
 .footer-heading {
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
-/* Social Icons */
 .social-links img {
   width: 24px;
   height: 24px;
@@ -103,7 +88,6 @@ body {
   transform: scale(1.1);
 }
 
-/* App Download Logos */
 .app-logo {
   height: 40px;
   width: auto;
@@ -114,82 +98,68 @@ body {
   transform: scale(1.05);
 }
 
-/* Footer Bottom */
 .footer-bottom {
   border-top: 1px solid #333;
   font-size: 0.9rem;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .app-download .col-md-9 {
     justify-content: center !important;
   }
 }
 
-/*Her*/
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins';
+/* =======================
+   🧭 NAVBAR (Responsive)
+   ======================= */
+.navbar {
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  background-color: #222;
+  padding: 15px 40px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 80px;
 }
-body {
-  font-family: "Segoe UI", sans-serif;
-  background: #f9f9f9;
-  color: #333;
-  line-height: 1.6;
-} */
 
-
+/* Logo */
 .logo {
   display: flex;
   align-items: center;
   font-size: 26px;
   font-weight: 700;
-  color: #e63946;
+  color: #fff;
+  gap: 10px;
+  margin-left: 2rem;
 }
 
-.logo img {
-  width: 40px;
-  margin-right: 10px;
+.logo a {
+  text-decoration: none;
   color: #fff;
 }
-
-
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-  margin: 0;
+.logo img {
+  width: 40px;
+  margin-right: 5px;
 }
 
-nav a {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  position: relative;
-}
-
-/* Navigation Bar */
-nav {
-  background: #222;
-  padding: 15px 40px;
-}
-
+/* Nav List */
 nav ul {
   list-style: none;
   display: flex;
   align-items: center;
   gap: 30px;
   margin: 0;
+  padding: 0;
 }
 
 nav ul li {
   display: flex;
   align-items: center;
+  margin-right: 2rem;
 }
 
 nav a {
@@ -199,13 +169,25 @@ nav a {
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
 }
 
-nav a:hover {
-  color: white;
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #e63946;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
 }
 
-/* 🔍 Modern Search Box */
+nav a:hover::after {
+  width: 100%;
+}
+
+/* 🔍 Search Box */
 .search-box {
   display: flex;
   align-items: center;
@@ -227,45 +209,67 @@ nav a:hover {
 
 .search-box input:focus {
   width: 250px;
-  /* expands on focus */
 }
 
 .search-box button {
   background: white;
   border: none;
-  color: #fff;
   padding: 10px 14px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: transform 0.2s;
 }
 
 .search-box button:hover {
-  background: white;
   transform: scale(1.1);
 }
 
-/* Optional glowing effect when focused */
 .search-box:focus-within {
   box-shadow: 0 0 8px whitesmoke;
 }
 
-
-nav a::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  background: #e63946;
-  left: 0;
-  bottom: -5px;
-  transition: 0.3s;
+/* Hamburger Menu */
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
 }
 
-nav a:hover::after {
-  width: 100%;
+/* Responsive Navbar */
+@media (max-width: 900px) {
+  .navbar {
+    flex-wrap: nowrap;
+  }
+
+  nav ul {
+    flex-direction: column;
+    background: #222;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    display: none;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+
+  .search-box {
+    width: 80%;
+    margin: 10px auto;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
 }
 
-/* Hero */
+/* =======================
+   🏠 HERO SECTION
+   ======================= */
 .hero {
   height: 100vh;
   position: relative;
@@ -285,7 +289,6 @@ nav a:hover::after {
 .hero-content {
   position: absolute;
   z-index: 2;
-  /* keep above blurred images */
   max-width: 700px;
   top: 50%;
   left: 50%;
@@ -331,11 +334,12 @@ nav a:hover::after {
   background: #c71c30;
 }
 
-/* Slideshow */
+/* =======================
+   🖼️ SLIDESHOW
+   ======================= */
 .slideshow {
   position: relative;
   height: 100vh;
-  /* full screen */
   width: 100%;
 }
 
@@ -344,29 +348,18 @@ nav a:hover::after {
   inset: 0;
   background-size: cover;
   background-position: center;
-  image-rendering: crisp-edges;
   opacity: 0;
   transition: opacity 2s ease-in-out;
   filter: blur(6px) brightness(70%);
-  /* blur + darken */
-}
-
-.slide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
 }
 
 .slide.active {
   opacity: 1;
 }
 
-/* Section General */
-section {
-  padding: 80px 20px;
-}
-
-/* Services */
+/* =======================
+   ⚙️ SERVICES SECTION
+   ======================= */
 .services {
   background: #fff;
   text-align: center;
@@ -402,11 +395,9 @@ section {
   margin-bottom: 20px;
 }
 
-.service-card h3 {
-  margin-bottom: 15px;
-}
-
-/* Maids */
+/* =======================
+   🧹 MAIDS SECTION
+   ======================= */
 .maids {
   background: #fefefe;
 }
@@ -447,15 +438,6 @@ section {
   padding: 25px;
 }
 
-.maid-info h3 {
-  margin-bottom: 10px;
-}
-
-.maid-info p {
-  font-size: 15px;
-  margin-bottom: 15px;
-}
-
 .maid-info button {
   background: #e63946;
   color: white;
@@ -471,7 +453,9 @@ section {
   background: #c71c30;
 }
 
-/* Gallery */
+/* =======================
+   🖼️ GALLERY
+   ======================= */
 .gallery h2 {
   text-align: center;
   font-size: 36px;
@@ -498,7 +482,9 @@ section {
   transform: scale(1.05);
 }
 
-/* Reviews */
+/* =======================
+   ⭐ REVIEWS
+   ======================= */
 .reviews {
   background: #fff;
   text-align: center;
@@ -541,7 +527,9 @@ section {
   color: #e63946;
 }
 
-/* Contact */
+/* =======================
+   📞 CONTACT FORM
+   ======================= */
 .contact {
   background: #fff;
 }

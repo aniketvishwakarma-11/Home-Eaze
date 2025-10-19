@@ -1,35 +1,33 @@
 <header class="navbar">
-  <!-- <div class="logo">
-    <img src="https://img.icons8.com/fluency/64/maintenance.png" alt="HomeFix Logo">
-    HomeEase
-  </div> -->
+  <div class="logo">
+    <a href="/"><img src="https://img.icons8.com/fluency/64/maintenance.png" alt="HomeEase Logo">
+    HomeEase</a>
+  </div>
+
+  <div class="menu-toggle" id="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </div>
 
   <nav>
     <ul>
-      <!-- Home -->
-      <li><a href="/"><i class="fas fa-home" ></i> HomeEaze</a></li>
-
-      <!-- Search -->
       <li>
         <form action="/search" method="POST" class="search-box">
           <input type="text" name="query" placeholder="Search by Name, Profession, or Location">
           <button type="submit"><i class="fas fa-search"></i></button>
         </form>
       </li>
-    
-        <li><a href="/search"><i class="fas fa-users "></i> Professionals</a></li>
-
-      <!-- Contact -->
+      <li><a href="/search"><i class="fas fa-users"></i> Professionals</a></li>
       <li><a href="/contactUs"><i class="fas fa-envelope"></i> Contact Us</a></li>
-
-      <!-- Login/Register -->
       <li><a href="/login"><i class="fas fa-user"></i> Login/Register</a></li>
-
-      <!-- Booking -->
       <li><a href="/myBookings"><i class="fas fa-calendar-check"></i> Booking</a></li>
-
-      <!-- Professionals -->
-      
     </ul>
   </nav>
 </header>
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.querySelector("nav ul");
+
+  toggle.addEventListener("click", () => {
+    menu.classList.toggle("show");
+  });
+</script>
