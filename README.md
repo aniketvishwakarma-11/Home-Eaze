@@ -1,6 +1,5 @@
 # 🏠 HomeFix - Home Services Booking Platform
 
-![HomeFix Banner](https://via.placeholder.com/1200x400.png?text=HomeFix+-+Home+Services+at+Your+Doorstep)  
 *Book trusted home services instantly — cleaning, cooking, babysitting, and more.*
 
 ---
