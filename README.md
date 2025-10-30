@@ -92,9 +92,6 @@ The project is deployed on Render:
 
 ⚠️ Note: Free Render deployments may experience cold starts.
 First load might take a few seconds.
-
-📸 Screenshots
-Home Page	Booking Flow	Admin Panel
 		
 
 👥 User Roles
@@ -126,10 +123,11 @@ Commit your changes
 
 Open a Pull Request
 
-📬 Contact & Support
-👨‍💻 Developer: Aniket Vishwakarma
-📧 Email: aniketvishwakarma@example.com
-🔗 GitHub: github.com/aniketvishwakarma-11
+### 📬 Contact & Support
+
+👨‍💻 Developer: Aniket Vishwakarma <br>
+📧 Email: aniketvishwakarma@example.com<br>
+🔗 GitHub: github.com/aniketvishwakarma-11<br>
 
 ⭐ Show Your Support
 If you like this project, don’t forget to give it a ⭐ star on GitHub!
