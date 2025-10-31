@@ -125,7 +125,7 @@ Open a Pull Request
 ### 📬 Contact & Support
 
 👨‍💻 Developer: Aniket Vishwakarma <br>
-📧 Email: aniketvishwakarma@example.com<br>
+📧 Email: aniketvis675@gmail.com<br>
 🔗 GitHub: github.com/aniketvishwakarma-11<br>
 
 ⭐ Show Your Support

@@ -1,0 +1,25 @@
+Excited to share my latest project: **HomeFix - Home Services Booking Platform**! 🏠✨
+
+HomeFix is a full-stack web application designed to seamlessly connect users with trusted, verified home service professionals. Whether you need cleaning, cooking, babysitting, laundry, or gardening, HomeFix brings reliable help right to your doorstep.
+
+Key Features include:
+✅ User & Professional registration/login
+✅ Service browsing and advanced search
+✅ Secure booking system
+✅ Professional profiles with ratings
+✅ Admin dashboard for platform management
+✅ Responsive design for seamless use on any device
+
+Built with:
+🚀 Backend: Node.js, Express.js
+🍃 Templating: EJS
+🗄️ Database: MongoDB (with Mongoose)
+🔒 Auth: Passport.js
+
+Check out the live demo here:
+👉 https://home-eaze.onrender.com/
+
+Explore the code and contribute on GitHub:
+🔗 https://github.com/aniketvishwakarma-11/Home-fix.git
+
+#webdevelopment #fullstack #nodejs #expressjs #mongodb #javascript #project #opensource #homeservices #bookingplatform
